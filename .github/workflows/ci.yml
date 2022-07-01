@@ -26,3 +26,20 @@ jobs:
         context: .
         push: true
         tags: officebooking/officebooking-go
+        
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "starting running docker"
+            docker rm -f officebooking; \
+            docker rmi officebooking/officebooking-go:latest; \
+            docker pull officebooking/officebooking-go; \
+            docker run -d -p 8080:8080 --name officebooking officebooking/officebooking-go
