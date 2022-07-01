@@ -20,14 +20,14 @@ type Config struct {
 
 func InitDB() *gorm.DB {
 	config := Config{
-		DB_Username: "root",
-		DB_Password: "root123",
-		DB_Port:     "3306",
-		DB_Host:     "localhost",
+		DB_Username: "officebooking",
+		DB_Password: "AVNS_u6yrGnPAz9M1RnXHFih",
+		DB_Port:     "25060",
+		DB_Host:     "office-booking-do-user-11917513-0.b.db.ondigitalocean.com",
 		DB_Name:     "45_office_booking",
 	}
 
-	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	connectionString := fmt.Sprintf("mysql://officebooking:AVNS_u6yrGnPAz9M1RnXHFih@office-booking-do-user-11917513-0.b.db.ondigitalocean.com:25060/45_office_booking?ssl-mode=REQUIRED",
 
 		config.DB_Username,
 		config.DB_Password,
