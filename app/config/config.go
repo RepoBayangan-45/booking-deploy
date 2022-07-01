@@ -27,7 +27,7 @@ func InitDB() *gorm.DB {
 		DB_Name:     "45_office_booking",
 	}
 
-	connectionString := fmt.Sprintf("mysql://officebooking:AVNS_u6yrGnPAz9M1RnXHFih@office-booking-do-user-11917513-0.b.db.ondigitalocean.com:25060/45_office_booking?ssl-mode=REQUIRED",
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?ssl-mode=REQUIRED",,
 
 		config.DB_Username,
 		config.DB_Password,
