@@ -25,4 +25,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: officebooking/officebooking
+        tags: officebooking/officebooking-go
