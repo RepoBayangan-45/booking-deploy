@@ -4,7 +4,7 @@ import (
 	domain "Office-Booking/domain/users"
 	"fmt"
 
-	"gorm.io/driver/sqlserver"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -20,14 +20,14 @@ type Config struct {
 
 func InitDB() *gorm.DB {
 	config := Config{
-		DB_Username: "postgres",
+		DB_Username: "root",
 		DB_Password: "root123",
-		DB_Port:     "5432",
+		DB_Port:     "3306",
 		DB_Host:     "localhost",
 		DB_Name:     "45_office_booking",
 	}
 
-	connectionString := fmt.Sprintf("sqlserver://%s:%s@%s:%s?database=%s",
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 
 		config.DB_Username,
 		config.DB_Password,
@@ -37,7 +37,7 @@ func InitDB() *gorm.DB {
 	)
 
 	var err error
-	DB, err = gorm.Open(sqlserver.Open(connectionString), &gorm.Config{})
+	DB, err = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
