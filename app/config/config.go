@@ -27,7 +27,7 @@ func InitDB() *gorm.DB {
 		DB_Name:     "45_office_booking",
 	}
 
-	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?ssl-mode=REQUIRED",,
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?ssl-mode=REQUIRED",
 
 		config.DB_Username,
 		config.DB_Password,
