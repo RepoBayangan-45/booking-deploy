@@ -7,5 +7,4 @@ type UsersResponse struct {
 	Email        string `json:"email"`
 	Name         string `json:"name"`
 	Phone        string `json:"phone"`
-	TanggalLahir time.Time
 }
