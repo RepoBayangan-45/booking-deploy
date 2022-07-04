@@ -16,7 +16,6 @@ type User struct {
 	Email        string         `json:"email"`
 	Name         string         `json:"name"`
 	Phone        string         `json:"phone"`
-	TanggalLahir time.Time
 	Password     string `json:"password"`
 }
 
