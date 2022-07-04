@@ -1,7 +1,5 @@
 package response
 
-import "time"
-
 type UsersResponse struct {
 	ID           int    `json:"id"`
 	Email        string `json:"email"`
