@@ -28,11 +28,11 @@ func NewUserController(e *echo.Echo, Usecase domain.UserUsecase) {
 	e.POST("/users", UserController.CreateUser)
 
 	// admin
-	e.GET("/admin/users", UserController.GetUsers, authMiddleware)
-	e.GET("/admin/users/:id", UserController.GetUserByID, authMiddleware)
-	e.GET("/admin/user/:name", UserController.GetUserByName, authMiddleware)
-	e.DELETE("/admin/users/:id", UserController.DeleteUsers, authMiddleware)
-	e.PUT("/admin/users/:id", UserController.UpdateUsers, authMiddleware)
+	e.GET("/admin/users", UserController.GetUsers)
+	e.GET("/admin/users/:id", UserController.GetUserByID)
+	e.GET("/admin/user/:name", UserController.GetUserByName)
+	e.DELETE("/admin/users/:id", UserController.DeleteUsers)
+	e.PUT("/admin/users/:id", UserController.UpdateUsers)
 }
 
 func (u *UserController) Login(c echo.Context) error {
