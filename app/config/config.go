@@ -1,7 +1,11 @@
 package config
 
 import (
-	domain "Office-Booking/domain/users"
+	_us "Office-Booking/domain/users"
+	_ge "Office-Booking/domain/gedung"
+	_re "Office-Booking/domain/review"
+	_je "Office-Booking/domain/jenisgedung"
+	_ne "Office-Booking/domain/nearby"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -49,5 +53,9 @@ func InitDB() *gorm.DB {
 }
 
 func InitialMigration() {
-	DB.AutoMigrate(&domain.User{})
+	DB.AutoMigrate(&_us.User{})
+	DB.AutoMigrate(&_ge.Gedung{})
+	DB.AutoMigrate(&_re.Review{})
+	DB.AutoMigrate(&_je.Jenisgedung{})
+	DB.AutoMigrate(&_ne.Nearby{})
 }
