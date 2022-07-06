@@ -26,15 +26,9 @@ func InitDB() *gorm.DB {
 		DB_Host:     "office-booking-do-user-11917513-0.b.db.ondigitalocean.com",
 		DB_Name:     "45_office_booking",
 
-		// DB_Username: "root",
-		// DB_Password: "root123",
-		// DB_Port:     "3306",
-		// DB_Host:     "127.0.0.1",
-		// DB_Name:     "45_office_booking",
 	}
 
 	connectionString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local",
-		// connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 
 		config.DB_Username,
 		config.DB_Password,
