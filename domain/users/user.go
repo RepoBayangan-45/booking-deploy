@@ -9,15 +9,16 @@ import (
 )
 
 type User struct {
-	ID           int            `json:"id"`
-	CreatedAt    time.Time      `json:"createdAt"`
-	UpdatedAt    time.Time      `json:"updatedAt"`
-	DeletedAt    gorm.DeletedAt `json:"deletedAt"`
-	Email        string         `json:"email"`
-	Name         string         `json:"name"`
-	Phone        string         `json:"phone"`
-	TanggalLahir time.Time
-	Password     string `json:"password"`
+	ID        int            `json:"id"`
+	CreatedAt time.Time      `json:"createdAt"`
+	UpdatedAt time.Time      `json:"updatedAt"`
+	DeletedAt gorm.DeletedAt `json:"deletedAt"`
+	Email     string         `json:"email"`
+	Name      string         `json:"name"`
+	Fullname  string         `json:"fullname"`
+	Alamat    string         `json:"alamat"`
+	Phone     string         `json:"phone"`
+	Password  string         `json:"password"`
 }
 
 type Users []User

@@ -74,12 +74,14 @@ func (u *UserController) RegisterUser(c echo.Context) error {
 		})
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"code":    200,
-		"status":  true,
-		"id_user": res.ID,
-		"email":   res.Email,
-		"name":    res.Name,
-		"phone":   res.Phone,
+		"code":     200,
+		"status":   true,
+		"id_user":  res.ID,
+		"email":    res.Email,
+		"name":     res.Name,
+		"fullname": res.Fullname,
+		"alamat":   res.Alamat,
+		"phone":    res.Phone,
 	})
 
 }
@@ -131,6 +133,10 @@ func (u *UserController) GetUserByID(c echo.Context) error {
 		ID:       int(foundUser.ID),
 		Email:    foundUser.Email,
 		Password: foundUser.Password,
+		Name:     foundUser.Name,
+		Fullname: foundUser.Fullname,
+		Alamat:   foundUser.Alamat,
+		Phone:    foundUser.Phone,
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -155,7 +161,9 @@ func (u *UserController) GetUserByName(c echo.Context) error {
 	res := response.UserResponse{
 		ID:       foundUser.ID,
 		Name:     foundUser.Name,
+		Fullname: foundUser.Fullname,
 		Email:    foundUser.Email,
+		Alamat:   foundUser.Alamat,
 		Phone:    foundUser.Phone,
 		Password: foundUser.Password,
 	}
@@ -176,10 +184,12 @@ func (u *UserController) GetUsers(c echo.Context) error {
 	var res []response.UsersResponse
 	for _, foundUser := range *foundUsers {
 		res = append(res, response.UsersResponse{
-			ID:    int(foundUser.ID),
-			Email: foundUser.Email,
-			Name:  foundUser.Name,
-			Phone: foundUser.Phone,
+			ID:       int(foundUser.ID),
+			Email:    foundUser.Email,
+			Name:     foundUser.Name,
+			Fullname: foundUser.Fullname,
+			Alamat:   foundUser.Alamat,
+			Phone:    foundUser.Phone,
 		})
 	}
 
@@ -226,8 +236,10 @@ func (u *UserController) UpdateUsers(c echo.Context) error {
 
 	if err := config.DB.Model(&domain.User{}).Where("id = ?", id).Updates(domain.User{
 		Name:     updateUser.Name,
+		Fullname: updateUser.Fullname,
 		Email:    updateUser.Email,
 		Password: updateUser.Password,
+		Alamat:   updateUser.Alamat,
 		Phone:    updateUser.Phone,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{

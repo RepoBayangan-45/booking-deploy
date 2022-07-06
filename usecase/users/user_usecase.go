@@ -51,7 +51,13 @@ func (u *userUsecase) RegisterUser(request request.RegisterRequest) (*domain.Use
 		return nil, errors.New("password belum di isi")
 	}
 	if request.Name == "" {
-		return nil, errors.New("nama belum di isi")
+		return nil, errors.New("username belum di isi")
+	}
+	if request.Fullname == "" {
+		return nil, errors.New("nama lengkap belum di isi")
+	}
+	if request.Alamat == "" {
+		return nil, errors.New("alamat belum di isi")
 	}
 	if request.Phone == "" {
 		return nil, errors.New("no hp belum di isi")
@@ -61,6 +67,8 @@ func (u *userUsecase) RegisterUser(request request.RegisterRequest) (*domain.Use
 		Email:    request.Email,
 		Password: request.Password,
 		Name:     request.Name,
+		Fullname: request.Fullname,
+		Alamat:   request.Alamat,
 		Phone:    request.Phone,
 	}
 
@@ -80,6 +88,8 @@ func (u *userUsecase) Create(request request.UserCreateRequest) (*domain.User, e
 		Email:    request.Email,
 		Password: request.Password,
 		Name:     request.Name,
+		Fullname: request.Fullname,
+		Alamat:   request.Alamat,
 		Phone:    request.Phone,
 	}
 
