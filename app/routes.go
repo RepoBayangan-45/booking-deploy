@@ -53,7 +53,7 @@ func Run() {
 	_jenisgedungController.NewJenisgedungController(e, jenisgedungUsecase)
 	_gedungController.NewGedungController(e, gedungUsecase)
 	_reviewController.NewReviewController(e, reviewUsecase)
-	address := fmt.Sprintf(":%d", 8080)
+	address := fmt.Sprintf(":%d", 8000)
 
 	if err := e.Start(address); err != nil {
 		log.Info("Exit The Server")
