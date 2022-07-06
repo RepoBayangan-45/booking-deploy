@@ -28,7 +28,7 @@ func InitDB() *gorm.DB {
 
 	}
 
-	connectionString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local",
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 
 		config.DB_Username,
 		config.DB_Password,
