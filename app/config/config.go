@@ -24,11 +24,11 @@ type Config struct {
 
 func InitDB() *gorm.DB {
 	config := Config{
-		DB_Username: "root",
-		DB_Password: "root123",
-		DB_Port:     "3306",
-		DB_Host:     "localhost",
-		DB_Name:     "45_office_booking",
+		DB_Username: "doadmin",
+		DB_Password: "AVNS_hi6OU7gGH3lcMdZZ0zP",
+		DB_Port:     "25060",
+		DB_Host:     "officebooking-do-user-11917513-0.b.db.ondigitalocean.com",
+		DB_Name:     "defaultdb",
 	}
 
 	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
