@@ -31,11 +31,12 @@ func InitDB() *gorm.DB {
 		DB_Name:     "45_office_booking",
 	}
 
-	connectionString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local",
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+
 		config.DB_Username,
 		config.DB_Password,
-		config.DB_Port,
 		config.DB_Host,
+		config.DB_Port,
 		config.DB_Name,
 	)
 
@@ -51,9 +52,11 @@ func InitDB() *gorm.DB {
 }
 
 func InitialMigration() {
-	DB.AutoMigrate(&_us.User{})
-	DB.AutoMigrate(&_ge.Gedung{})
-	DB.AutoMigrate(&_je.Jenisgedung{})
-	DB.AutoMigrate(&_ne.Nearby{})
-	DB.AutoMigrate(&_re.Review{})
+	DB.AutoMigrate(
+		&_us.User{},
+		&_ge.Gedung{},
+		&_je.Jenisgedung{},
+		&_ne.Nearby{},
+		&_re.Review{},
+	)
 }
