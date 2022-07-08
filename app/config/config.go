@@ -26,7 +26,7 @@ func InitDB() *gorm.DB {
 	config := Config{
 		DB_Username: "officebooking",
 		DB_Password: "AVNS_3PvNAqGO5pQkRw4rtHK",
-		DB_Port:     "3306",
+		DB_Port:     "25060",
 		DB_Host:     "office-booking-do-user-11917513-0.b.db.ondigitalocean.com",
 		DB_Name:     "45_office_booking",
 	}
