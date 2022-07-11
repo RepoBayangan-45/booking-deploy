@@ -25,6 +25,7 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 )
 
@@ -47,6 +48,7 @@ func Run() {
 	reviewUsecase := reviewUsecase.NewReviewUseCase(reviewRepository)
 
 	e := echo.New()
+	e.Use(middleware.CORS())
 	mid.NewGoMiddleware().LogMiddleware(e)
 	_userController.NewUserController(e, userUsecase)
 	_nearbyController.NewNearbyController(e, nearbyUsecase)
