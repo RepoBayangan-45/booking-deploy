@@ -57,7 +57,8 @@ func Run() {
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://officebooking-app-pn6n3.ondigitalocean.app/"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowHeaders: []string{echo.HeaderAllow, echo.HeaderOrigin, echo.HeaderXRequestedWith,
+			echo.HeaderContentType, echo.HeaderAccept, echo.HeaderCacheControl, echo.HeaderAuthorization},
 	}))
 	address := fmt.Sprintf(":%d", 8080)
 
