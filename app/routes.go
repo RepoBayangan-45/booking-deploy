@@ -56,9 +56,11 @@ func Run() {
 	_reviewController.NewReviewController(e, reviewUsecase)
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"https://officebooking-app-pn6n3.ondigitalocean.app/"},
+		AllowOrigins: []string{"https://*", "http://*"},
 		AllowHeaders: []string{echo.HeaderAllow, echo.HeaderOrigin, echo.HeaderXRequestedWith,
 			echo.HeaderContentType, echo.HeaderAccept, echo.HeaderCacheControl, echo.HeaderAuthorization},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowCredentials: true,
 	}))
 	address := fmt.Sprintf(":%d", 8080)
 
