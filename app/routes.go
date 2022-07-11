@@ -48,13 +48,17 @@ func Run() {
 	reviewUsecase := reviewUsecase.NewReviewUseCase(reviewRepository)
 
 	e := echo.New()
-	e.Use(middleware.CORS())
 	mid.NewGoMiddleware().LogMiddleware(e)
 	_userController.NewUserController(e, userUsecase)
 	_nearbyController.NewNearbyController(e, nearbyUsecase)
 	_jenisgedungController.NewJenisgedungController(e, jenisgedungUsecase)
 	_gedungController.NewGedungController(e, gedungUsecase)
 	_reviewController.NewReviewController(e, reviewUsecase)
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"https://officebooking-app-pn6n3.ondigitalocean.app/"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 	address := fmt.Sprintf(":%d", 8080)
 
 	if err := e.Start(address); err != nil {
