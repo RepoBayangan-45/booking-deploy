@@ -21,7 +21,7 @@ func NewGedungController(e *echo.Echo, Usecase domain.GedungUsecase) {
 	}
 
 	// customer
-	e.GET("/customer/gedung", GedungController.GetAll)
+	e.GET("/customer/gedungs", GedungController.GetAll)
 	e.GET("/customer/gedung/price", GedungController.GetByPrice)
 	e.GET("/customer/gedung/:id", GedungController.GetByID)
 
