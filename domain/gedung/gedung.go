@@ -18,6 +18,30 @@ type Gedung struct {
 	Latitude    string         `json:"latitude"`
 	Longitude   string         `json:"longitude"`
 	Description string         `json:"description"`
+	Review      []Review       `gorm:"Foreignkey:IDGedung;" json:"review"`
+	Nearby      []Nearby       `gorm:"Foreignkey:IDGedung;" json:"nearby"`
+	Jenis       []Jenis        `gorm:"Foreignkey:IDGedung;" json:"jenis"`
+}
+
+type Review struct {
+	ID          int
+	Rating      float64
+	Description string
+	IDGedung    string
+}
+type Nearby struct {
+	ID             int
+	NameFacilities string
+	Jenis          string
+	Jarak          string
+	Latitude       string
+	Longtitude     string
+	IDGedung       string
+}
+type Jenis struct {
+	ID       int
+	Jenis    string
+	IDGedung string
 }
 
 type GedungRepository interface {

@@ -13,6 +13,7 @@ type Jenisgedung struct {
 	UpdatedAt time.Time      `json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `json:"deletedAt"`
 	Jenis     string         `json:"jenis"`
+	IDGedung  int            `json:"id_gedung"`
 }
 
 type Jenisgedungs []Jenisgedung

@@ -58,6 +58,9 @@ func (u *GedungController) Create(c echo.Context) error {
 		"Latitude":    res.Latitude,
 		"Longitude":   res.Longitude,
 		"Description": res.Description,
+		"Review":      res.Review,
+		"Jenis":       res.Jenis,
+		"Nearby":      res.Nearby,
 	})
 
 }
@@ -77,7 +80,35 @@ func (u *GedungController) GetByID(c echo.Context) error {
 		})
 	}
 
-	res := response.ResponsePost{
+	var res []response.ResponsePost
+	reviews := make([]response.Review, 0)
+	for _, review := range foundGedung.Review {
+		reviews = append(reviews, response.Review{
+			ID:          review.ID,
+			Rating:      review.Rating,
+			Description: review.Description,
+		})
+	}
+	Jenis := make([]response.Jenis, 0)
+	for _, jenis := range foundGedung.Jenis {
+		Jenis = append(Jenis, response.Jenis{
+			ID:    jenis.ID,
+			Jenis: jenis.Jenis,
+		})
+	}
+	nearbys := make([]response.Nearby, 0)
+	for _, nearby := range foundGedung.Nearby {
+		nearbys = append(nearbys, response.Nearby{
+			ID:             nearby.ID,
+			NameFacilities: nearby.NameFacilities,
+			Jenis:          nearby.Jenis,
+			Jarak:          nearby.Jarak,
+			Latitude:       nearby.Latitude,
+			Longtitude:     nearby.Longtitude,
+		})
+	}
+
+	res = append(res, response.ResponsePost{
 		ID:          int(foundGedung.ID),
 		Name:        foundGedung.Name,
 		Location:    foundGedung.Location,
@@ -85,7 +116,10 @@ func (u *GedungController) GetByID(c echo.Context) error {
 		Latitude:    foundGedung.Latitude,
 		Longitude:   foundGedung.Longitude,
 		Description: foundGedung.Description,
-	}
+		Reviews:     reviews,
+		Jenis:       Jenis,
+		Nearby:      nearbys,
+	})
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"code":   200,
@@ -130,6 +164,32 @@ func (u *GedungController) GetAll(c echo.Context) error {
 
 	var res []response.ResponsePost
 	for _, foundGedung := range foundGedung {
+		reviews := make([]response.Review, 0)
+		for _, review := range foundGedung.Review {
+			reviews = append(reviews, response.Review{
+				ID:          review.ID,
+				Rating:      review.Rating,
+				Description: review.Description,
+			})
+		}
+		Jenis := make([]response.Jenis, 0)
+		for _, jenis := range foundGedung.Jenis {
+			Jenis = append(Jenis, response.Jenis{
+				ID:    jenis.ID,
+				Jenis: jenis.Jenis,
+			})
+		}
+		nearbys := make([]response.Nearby, 0)
+		for _, nearby := range foundGedung.Nearby {
+			nearbys = append(nearbys, response.Nearby{
+				ID:             nearby.ID,
+				NameFacilities: nearby.NameFacilities,
+				Jenis:          nearby.Jenis,
+				Jarak:          nearby.Jarak,
+				Latitude:       nearby.Latitude,
+				Longtitude:     nearby.Longtitude,
+			})
+		}
 		res = append(res, response.ResponsePost{
 			ID:          foundGedung.ID,
 			Name:        foundGedung.Name,
@@ -138,6 +198,9 @@ func (u *GedungController) GetAll(c echo.Context) error {
 			Latitude:    foundGedung.Latitude,
 			Longitude:   foundGedung.Longitude,
 			Description: foundGedung.Description,
+			Reviews:     reviews,
+			Jenis:       Jenis,
+			Nearby:      nearbys,
 		})
 	}
 

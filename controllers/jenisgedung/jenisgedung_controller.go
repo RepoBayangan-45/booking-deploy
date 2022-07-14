@@ -30,34 +30,55 @@ func NewJenisgedungController(e *echo.Echo, Usecase domain.JenisgedungUsecase) {
 	e.GET("/admin/jenisgedung/:id", JenisgedungController.GetJenisgedungByID)
 	e.DELETE("/admin/jenisgedung/:id", JenisgedungController.DeleteJenisgedungs)
 	e.PUT("/admin/jenisgedung/:id", JenisgedungController.UpdateJenisgedungs)
-	e.POST("/jenisgedung", JenisgedungController.CreateJenisgedung)
+	e.POST("/admin/jenisgedung", JenisgedungController.CreateJenisgedung)
 }
 
 func (u *JenisgedungController) CreateJenisgedung(c echo.Context) error {
 	var req request.JenisgedungCreateRequest
 
+	// 	if err := c.Bind(&req); err != nil {
+	// 		return c.JSON(http.StatusBadRequest, err.Error())
+	// 	}
+
+	// 	createdJenisgedung, err := u.JenisgedungUsecase.Create(req)
+	// 	if err != nil {
+	// 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+	// 			"code":    400,
+	// 			"status":  false,
+	// 			"message": err.Error(),
+	// 		})
+	// 	}
+
+	// 	res := response.JenisgedungCreateResponse{
+	// 		ID:    int(createdJenisgedung.ID),
+	// 		Jenis: createdJenisgedung.Jenis,
+	// 	}
+
+	// 	return c.JSON(http.StatusCreated, map[string]interface{}{
+	// 		"code":   201,
+	// 		"status": true,
+	// 		"data":   res,
+	// 	})
+	// }
+
 	if err := c.Bind(&req); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	createdJenisgedung, err := u.JenisgedungUsecase.Create(req)
+	res, err := u.JenisgedungUsecase.Create(req)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"code":    400,
+		return c.JSON(http.StatusUnauthorized, map[string]interface{}{
+			"code":    401,
 			"status":  false,
 			"message": err.Error(),
 		})
 	}
-
-	res := response.JenisgedungCreateResponse{
-		ID:    int(createdJenisgedung.ID),
-		Jenis: createdJenisgedung.Jenis,
-	}
-
-	return c.JSON(http.StatusCreated, map[string]interface{}{
-		"code":   201,
-		"status": true,
-		"data":   res,
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"code":     200,
+		"status":   true,
+		"ID":       res.ID,
+		"Jenis":    res.Jenis,
+		"IDGedung": res.IDGedung,
 	})
 }
 
@@ -77,8 +98,9 @@ func (u *JenisgedungController) GetJenisgedungByID(c echo.Context) error {
 	}
 
 	res := response.JenisgedungResponse{
-		ID:    int(foundJenisgedung.ID),
-		Jenis: foundJenisgedung.Jenis,
+		ID:       int(foundJenisgedung.ID),
+		Jenis:    foundJenisgedung.Jenis,
+		IDGedung: foundJenisgedung.IDGedung,
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -97,8 +119,9 @@ func (u *JenisgedungController) GetJenisgedungs(c echo.Context) error {
 	var res []response.JenisgedungsResponse
 	for _, foundJenisgedung := range *foundJenisgedungs {
 		res = append(res, response.JenisgedungsResponse{
-			ID:    int(foundJenisgedung.ID),
-			Jenis: foundJenisgedung.Jenis,
+			ID:       int(foundJenisgedung.ID),
+			Jenis:    foundJenisgedung.Jenis,
+			IDGedung: foundJenisgedung.IDGedung,
 		})
 	}
 

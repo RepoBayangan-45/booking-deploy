@@ -18,8 +18,12 @@ func (u *jenisgedungUsecase) Create(request request.JenisgedungCreateRequest) (*
 	if request.Jenis == "" {
 		return nil, errors.New("jenis gedung belum diisi")
 	}
+	if request.IDGedung == 0 {
+		return nil, errors.New("id-gedung empty")
+	}
 	jenisgedung := &domain.Jenisgedung{
-		Jenis: request.Jenis,
+		Jenis:    request.Jenis,
+		IDGedung: request.IDGedung,
 	}
 
 	createdJenisgedung, err := u.JenisgedungRepo.Create(jenisgedung)
