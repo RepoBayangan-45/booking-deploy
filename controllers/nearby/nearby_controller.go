@@ -56,6 +56,7 @@ func (u *NearbyController) CreateNearby(c echo.Context) error {
 		Jarak:          createdNearby.Jarak,
 		Latitude:       createdNearby.Latitude,
 		Longtitude:     createdNearby.Longtitude,
+		IDGedung:       createdNearby.IDGedung,
 	}
 
 	return c.JSON(http.StatusCreated, map[string]interface{}{
@@ -87,6 +88,7 @@ func (u *NearbyController) GetNearbyByID(c echo.Context) error {
 		Jarak:          foundNearby.Jarak,
 		Latitude:       foundNearby.Latitude,
 		Longtitude:     foundNearby.Longtitude,
+		IDGedung:       foundNearby.IDGedung,
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -111,6 +113,7 @@ func (u *NearbyController) GetNearbys(c echo.Context) error {
 			Jarak:          foundNearby.Jarak,
 			Latitude:       foundNearby.Latitude,
 			Longtitude:     foundNearby.Longtitude,
+			IDGedung:       foundNearby.IDGedung,
 		})
 	}
 
@@ -161,6 +164,7 @@ func (u *NearbyController) UpdateNearbys(c echo.Context) error {
 		Jarak:          updateNearby.Jarak,
 		Latitude:       updateNearby.Latitude,
 		Longtitude:     updateNearby.Longtitude,
+		IDGedung:       updateNearby.IDGedung,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"messages": err.Error(),

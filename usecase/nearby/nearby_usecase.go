@@ -30,12 +30,16 @@ func (u *nearbyUsecase) Create(request request.NearbyCreateRequest) (*domain.Nea
 	if request.Longtitude == "" {
 		return nil, errors.New("longtitude empty")
 	}
+	if request.IDGedung == 0 {
+		return nil, errors.New("id_gedung empty")
+	}
 	nearby := &domain.Nearby{
 		NameFacilities: request.NameFacilities,
 		Jenis:          request.Jenis,
 		Jarak:          request.Jarak,
 		Latitude:       request.Latitude,
 		Longtitude:     request.Longtitude,
+		IDGedung:       request.IDGedung,
 	}
 
 	createdNearby, err := u.NearbyRepo.Create(nearby)

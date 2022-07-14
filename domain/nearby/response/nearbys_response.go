@@ -7,4 +7,5 @@ type NearbysResponse struct {
 	Jarak          string `json:"jarak"`
 	Latitude       string `json:"latitude"`
 	Longtitude     string `json:"longtitude"`
+	IDGedung       int    `json:"id_gedung"`
 }
