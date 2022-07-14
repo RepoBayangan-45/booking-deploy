@@ -49,6 +49,7 @@ type GedungRepository interface {
 	GetAll() ([]Gedung, error)
 	GetByID(id int) (*Gedung, error)
 	GetByPrice(price string) (*Gedung, error)
+	GetByLocation(location string) (*Gedung, error)
 	Update(id int) (*Gedung, error)
 	Delete(id int) (*Gedung, error)
 }
@@ -58,6 +59,7 @@ type GedungUsecase interface {
 	GetAll() ([]Gedung, error)
 	GetByID(id int) (*Gedung, error)
 	GetByPrice(price string) (*Gedung, error)
+	GetByLocation(location string) (*Gedung, error)
 	Update(id int) (*Gedung, error)
 	Delete(id int) (*Gedung, error)
 }

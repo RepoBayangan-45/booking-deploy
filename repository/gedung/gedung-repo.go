@@ -68,6 +68,15 @@ func (u *gedungRepository) GetByPrice(price string) (*domain.Gedung, error) {
 	return gedung, nil
 }
 
+func (u *gedungRepository) GetByLocation(location string) (*domain.Gedung, error) {
+	gedung := &domain.Gedung{Location: location}
+	if err := u.Conn.Where("location = ?", location).First(&gedung).Error; err != nil {
+		return nil, err
+	}
+
+	return gedung, nil
+}
+
 // Update implements domain.GedungRepository
 func (u *gedungRepository) Update(id int) (*domain.Gedung, error) {
 	gedung := &domain.Gedung{ID: id}

@@ -128,6 +128,34 @@ func (u *GedungController) GetByID(c echo.Context) error {
 	})
 }
 
+func (u *GedungController) GetByLocation(c echo.Context) error {
+	location := (c.Param("location"))
+	foundGedung, err := u.GedungUsecase.GetByPrice(location)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, map[string]interface{}{
+			"code":    404,
+			"status":  false,
+			"message": err.Error(),
+		})
+	}
+
+	res := response.ResponsePost{
+		ID:          int(foundGedung.ID),
+		Name:        foundGedung.Name,
+		Location:    foundGedung.Location,
+		Price:       foundGedung.Price,
+		Latitude:    foundGedung.Latitude,
+		Longitude:   foundGedung.Longitude,
+		Description: foundGedung.Description,
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"code":   200,
+		"status": true,
+		"data":   res,
+	})
+}
+
 func (u *GedungController) GetByPrice(c echo.Context) error {
 	price := (c.Param("price"))
 	foundGedung, err := u.GedungUsecase.GetByPrice(price)

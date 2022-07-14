@@ -90,6 +90,15 @@ func (u *gedungUsecase) GetByPrice(price string) (*domain.Gedung, error) {
 	return gedung, err
 }
 
+func (u *gedungUsecase) GetByLocation(location string) (*domain.Gedung, error) {
+	gedung, err := u.GedungRepo.GetByLocation(location)
+	if err != nil {
+		return nil, err
+	}
+
+	return gedung, err
+}
+
 // Update implements domain.GedungUsecase
 func (u *gedungUsecase) Update(id int) (*domain.Gedung, error) {
 	gedung, err := u.GedungRepo.Update(id)
