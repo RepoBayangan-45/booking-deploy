@@ -29,8 +29,8 @@ func NewGedungController(e *echo.Echo, Usecase domain.GedungUsecase) {
 	e.POST("/admin/gedung", GedungController.Create)
 	e.GET("/admin/gedungs", GedungController.GetAll)
 	e.GET("/admin/gedung/:id", GedungController.GetByID)
-	e.PUT("/admin/gedungs/:id", GedungController.Update)
-	e.DELETE("/admin/gedung/:id", GedungController.Delete)
+	e.PUT("/admin/gedung/:id", GedungController.Update)
+	e.DELETE("/admin/Gedung/:id", GedungController.Delete)
 }
 
 func (u *GedungController) Create(c echo.Context) error {
