@@ -280,6 +280,7 @@ func (u *GedungController) Update(c echo.Context) error {
 		Latitude:    updateGedung.Latitude,
 		Longitude:   updateGedung.Longitude,
 		Description: updateGedung.Description,
+		Jenis:       updateGedung.Jenis,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"messages": err.Error(),
