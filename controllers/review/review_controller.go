@@ -5,9 +5,7 @@ import (
 	domain "Office-Booking/domain/review"
 	"Office-Booking/domain/review/request"
 	"Office-Booking/domain/review/response"
-	"io"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -26,40 +24,68 @@ func NewReviewController(e *echo.Echo, Usecase domain.ReviewUsecase) {
 	e.DELETE("/admin/review/:id", ReviewController.Delete)
 	e.GET("/admin/review", ReviewController.GetAll)
 }
+
+// func (u *ReviewController) Create(c echo.Context) error {
+// 	var req request.ReviewPost
+
+// 	file, err := c.FormFile("file")
+// 	if err != nil {
+// 		return err
+// 	}
+// 	src, err := file.Open()
+// 	if err != nil {
+// 		return err
+// 	}
+// 	defer src.Close()
+
+// 	// Destination
+// 	dst, err := os.Create(file.Filename)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	defer dst.Close()
+
+// 	// Copy
+// 	if _, err = io.Copy(dst, src); err != nil {
+// 		return err
+// 	}
+// 	rating, _ := strconv.ParseFloat(c.FormValue("rating"), 32)
+// 	req.Img = file.Filename
+// 	req.Rating = rating
+// 	req.Description = c.FormValue("description")
+// 	req.IDGedung = int(0)
+
+// 	res, err := u.ReviewUsecase.Create(req)
+// 	if err != nil {
+// 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+// 			"code":    403,
+// 			"status":  false,
+// 			"message": err.Error(),
+// 		})
+// 	}
+// 	return c.JSON(http.StatusOK, map[string]interface{}{
+// 		"code":        200,
+// 		"status":      true,
+// 		"ID":          res.ID,
+// 		"Rating":      res.Rating,
+// 		"Description": res.Description,
+// 		"IDGedung":    res.IDGedung,
+// 	})
+// 	// return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s and email=%s.</p>", file.Filename, name, email))
+
+// }
+
 func (u *ReviewController) Create(c echo.Context) error {
 	var req request.ReviewPost
 
-	file, err := c.FormFile("file")
-	if err != nil {
-		return err
+	if err := c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	src, err := file.Open()
-	if err != nil {
-		return err
-	}
-	defer src.Close()
-
-	// Destination
-	dst, err := os.Create(file.Filename)
-	if err != nil {
-		return err
-	}
-	defer dst.Close()
-
-	// Copy
-	if _, err = io.Copy(dst, src); err != nil {
-		return err
-	}
-	rating, _ := strconv.ParseFloat(c.FormValue("rating"), 32)
-	req.Img = file.Filename
-	req.Rating = rating
-	req.Description = c.FormValue("description")
-	req.IDGedung = int(0)
 
 	res, err := u.ReviewUsecase.Create(req)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"code":    403,
+		return c.JSON(http.StatusUnauthorized, map[string]interface{}{
+			"code":    401,
 			"status":  false,
 			"message": err.Error(),
 		})
@@ -72,7 +98,6 @@ func (u *ReviewController) Create(c echo.Context) error {
 		"Description": res.Description,
 		"IDGedung":    res.IDGedung,
 	})
-	// return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s and email=%s.</p>", file.Filename, name, email))
 
 }
 
