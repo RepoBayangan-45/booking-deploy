@@ -22,6 +22,10 @@ import (
 	_reviewController "Office-Booking/controllers/review"
 	reviewRepository "Office-Booking/repository/review"
 	reviewUsecase "Office-Booking/usecase/review"
+
+	_bookingController "Office-Booking/controllers/booking"
+	bookingRepository "Office-Booking/repository/booking"
+	bookingUsecase "Office-Booking/usecase/booking"
 	"fmt"
 
 	"github.com/labstack/echo/v4"
@@ -47,6 +51,9 @@ func Run() {
 	reviewRepository := reviewRepository.NewReviewRepository(db)
 	reviewUsecase := reviewUsecase.NewReviewUseCase(reviewRepository)
 
+	bookingRepository := bookingRepository.NewBookingRepository(db)
+	bookingUsecase := bookingUsecase.NewBookingUsecase(bookingRepository)
+
 	e := echo.New()
 	mid.NewGoMiddleware().LogMiddleware(e)
 	_userController.NewUserController(e, userUsecase)
@@ -54,6 +61,7 @@ func Run() {
 	_jenisgedungController.NewJenisgedungController(e, jenisgedungUsecase)
 	_gedungController.NewGedungController(e, gedungUsecase)
 	_reviewController.NewReviewController(e, reviewUsecase)
+	_bookingController.NewBookingController(e, bookingUsecase)
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://*", "http://*"},

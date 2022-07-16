@@ -1,6 +1,7 @@
 package config
 
 import (
+	_bo "Office-Booking/domain/booking"
 	_ge "Office-Booking/domain/gedung"
 	_je "Office-Booking/domain/jenisgedung"
 	_ne "Office-Booking/domain/nearby"
@@ -58,5 +59,6 @@ func InitialMigration() {
 		&_je.Jenisgedung{},
 		&_ne.Nearby{},
 		&_re.Review{},
+		&_bo.Booking{},
 	)
 }
