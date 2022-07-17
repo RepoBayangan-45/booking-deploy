@@ -79,3 +79,12 @@ func (u *userRepository) Updates(id int) (*domain.User, error) {
 
 	return user, nil
 }
+
+// CreateBooking implements domain.UserRepository
+func (u *userRepository) CreateBooking(user *domain.User) (*domain.User, error) {
+	if err := u.Conn.Create(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

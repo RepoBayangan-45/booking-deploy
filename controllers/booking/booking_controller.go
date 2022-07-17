@@ -21,15 +21,15 @@ func NewBookingController(e *echo.Echo, Usecase domain.BookingUsecase) {
 	}
 
 	// customer
-	e.GET("/customer/booking", BookingController.GetAll)
+	e.GET("/booking", BookingController.GetAll)
 	e.GET("/customer/booking/:id", BookingController.GetByID)
 
 	// admin
 	e.POST("/admin/booking", BookingController.Create)
-	e.GET("/admin/booking", BookingController.GetAll)
+	e.GET("/admin/bookings", BookingController.GetAll)
 	e.GET("/admin/booking/:id", BookingController.GetByID)
-	e.PUT("/admin/gedungs/:id", BookingController.Update)
-	e.DELETE("/admin/gedung/:id", BookingController.Delete)
+	e.PUT("/admin/booking/:id", BookingController.Update)
+	e.DELETE("/admin/booking/:id", BookingController.Delete)
 }
 
 func (u *BookingController) Create(c echo.Context) error {

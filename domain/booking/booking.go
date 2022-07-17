@@ -8,7 +8,7 @@ import (
 )
 
 type Booking struct {
-	ID          int            `json:"id"`
+	ID          int            `json:"id" gorm:"PrimaryKey"`
 	CreatedAt   time.Time      `json:"createdAt"`
 	UpdatedAt   time.Time      `json:"updatedAt"`
 	DeletedAt   gorm.DeletedAt `json:"deletedAt"`
@@ -22,12 +22,13 @@ type Booking struct {
 	Jenis       []Jenis        `gorm:"Foreignkey:IDBooking;" json:"jenis"`
 }
 type User struct {
-	ID       int
-	Email    string
-	Name     string
-	FullName string
-	Alamat   string
-	Phone    string
+	ID        int
+	Email     string
+	Name      string
+	FullName  string
+	Alamat    string
+	Phone     string
+	IDBooking string
 }
 type Gedung struct {
 	ID          int
@@ -37,10 +38,12 @@ type Gedung struct {
 	Latitude    string
 	Longitude   string
 	Description string
+	IDBooking   string
 }
 type Jenis struct {
-	ID    int
-	Jenis string
+	ID        int
+	Jenis     string
+	IDBooking string
 }
 
 type BookingRepository interface {

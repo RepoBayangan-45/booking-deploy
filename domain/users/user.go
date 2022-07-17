@@ -19,12 +19,14 @@ type User struct {
 	Alamat    string         `json:"alamat"`
 	Phone     string         `json:"phone"`
 	Password  string         `json:"password"`
+	IDBooking int            `json:"id_booking"`
 }
 
 type Users []User
 
 type UserRepository interface {
 	Create(user *User) (*User, error)
+	CreateBooking(user *User) (*User, error)
 	ReadByID(id int) (*User, error)
 	ReadByName(name string) (*User, error)
 	ReadAll() (*Users, error)
@@ -36,6 +38,7 @@ type UserRepository interface {
 
 type UserUsecase interface {
 	Create(request request.UserCreateRequest) (*User, error)
+	CreateBooking(request request.UserBookingReq) (*User, error)
 	ReadByID(id int) (*User, error)
 	ReadByName(name string) (*User, error)
 	ReadAll() (*Users, error)

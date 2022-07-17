@@ -2,7 +2,6 @@ package nearby
 
 import (
 	"Office-Booking/app/config"
-	mid "Office-Booking/delivery/http/middleware"
 	domain "Office-Booking/domain/nearby"
 	"Office-Booking/domain/nearby/request"
 	"Office-Booking/domain/nearby/response"
@@ -21,16 +20,16 @@ func NewNearbyController(e *echo.Echo, Usecase domain.NearbyUsecase) {
 		NearbyUsecase: Usecase,
 	}
 
-	authMiddleware := mid.NewGoMiddleware().AuthMiddleware()
-	e.GET("/nearby/:id", NearbyController.GetNearbyByID, authMiddleware)
-	e.GET("/nearby", NearbyController.GetNearbys)
+	// customer
+	e.GET("/customer/nearby/:id", NearbyController.GetNearbyByID)
+	e.GET("/customer/nearby", NearbyController.GetNearbys)
 
 	// admin
 	e.GET("/admin/nearby", NearbyController.GetNearbys)
 	e.GET("/admin/nearby/:id", NearbyController.GetNearbyByID)
-	e.DELETE("/admin/nearby/:id", NearbyController.DeleteNearbys)
-	e.PUT("/admin/nearby/:id", NearbyController.UpdateNearbys)
-	e.POST("/nearby", NearbyController.CreateNearby)
+	e.DELETE("/admin/nearby/:id//", NearbyController.DeleteNearbys)
+	e.PUT("/admin/nearby/:id/", NearbyController.UpdateNearbys)
+	e.POST("/admin/nearby/", NearbyController.CreateNearby)
 }
 
 func (u *NearbyController) CreateNearby(c echo.Context) error {

@@ -20,19 +20,23 @@ func NewUserController(e *echo.Echo, Usecase domain.UserUsecase) {
 	UserController := &UserController{
 		UserUsecase: Usecase,
 	}
+	authMiddleware := mid.NewGoMiddleware().AuthMiddleware()
 
+	// Auth
 	e.POST("/login", UserController.Login)
 	e.POST("/register", UserController.RegisterUser)
-	authMiddleware := mid.NewGoMiddleware().AuthMiddleware()
-	e.GET("/users/:id", UserController.GetUserByID, authMiddleware)
-	e.POST("/users", UserController.CreateUser)
+
+	// customer
+	e.POST("/customer", UserController.CreateUser)
+	e.GET("/customer/profile/:id", UserController.GetUserByID, authMiddleware)
+	e.PUT("/customer/profile/:id", UserController.UpdateUsers)
 
 	// admin
+	e.POST("/admin/booking/user", UserController.CreateBooking)
 	e.GET("/admin/users", UserController.GetUsers)
-	e.GET("/admin/users/:id", UserController.GetUserByID)
-	e.GET("/admin/user/:name", UserController.GetUserByName)
-	e.DELETE("/admin/users/:id", UserController.DeleteUsers)
-	e.PUT("/admin/users/:id", UserController.UpdateUsers)
+	e.GET("/admin/user/:id", UserController.GetUserByID)
+	e.DELETE("/admin/User/:id", UserController.DeleteUsers)
+	e.PUT("/admin/user/:id/", UserController.UpdateUsers)
 }
 
 func (u *UserController) Login(c echo.Context) error {
@@ -82,6 +86,32 @@ func (u *UserController) RegisterUser(c echo.Context) error {
 		"fullname": res.Fullname,
 		"alamat":   res.Alamat,
 		"phone":    res.Phone,
+	})
+
+}
+
+func (u *UserController) CreateBooking(c echo.Context) error {
+	var req request.UserBookingReq
+
+	if err := c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	res, err := u.UserUsecase.CreateBooking(req)
+	if err != nil {
+		return c.JSON(http.StatusUnauthorized, map[string]interface{}{
+			"code":    401,
+			"status":  false,
+			"message": err.Error(),
+		})
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"code":        200,
+		"status":      true,
+		"ID":          res.ID,
+		"Name":        res.Name,
+		"Description": res.Email,
+		"IDBooking":   res.IDBooking,
 	})
 
 }

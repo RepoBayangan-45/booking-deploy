@@ -145,3 +145,28 @@ func (u *userUsecase) Updates(id int) (*domain.User, error) {
 
 	return user, err
 }
+
+// CreateBooking implements domain.UserUsecase
+func (u *userUsecase) CreateBooking(request request.UserBookingReq) (*domain.User, error) {
+	if request.Name == "" {
+		return nil, errors.New("name belum di isi")
+	}
+	if request.Email == "" {
+		return nil, errors.New("email belum di isi")
+	}
+	if request.IDBooking == 0 {
+		return nil, errors.New("IDBooking belum di isi")
+	}
+	user := &domain.User{
+		Name:      request.Name,
+		Email:     request.Email,
+		IDBooking: request.IDBooking,
+	}
+
+	createdUserbooking, err := u.UserRepo.CreateBooking(user)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdUserbooking, nil
+}
