@@ -27,8 +27,8 @@ func NewNearbyController(e *echo.Echo, Usecase domain.NearbyUsecase) {
 	// admin
 	e.GET("/admin/nearby", NearbyController.GetNearbys)
 	e.GET("/admin/nearby/:id", NearbyController.GetNearbyByID)
-	e.DELETE("/admin/nearby/:id//", NearbyController.DeleteNearbys)
-	e.PUT("/admin/nearby/:id/", NearbyController.UpdateNearbys)
+	e.DELETE("/admin/nearby/:id", NearbyController.DeleteNearbys)
+	e.PUT("/admin/nearby/:id", NearbyController.UpdateNearbys)
 	e.POST("/admin/nearby/", NearbyController.CreateNearby)
 }
 
