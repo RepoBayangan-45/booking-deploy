@@ -24,7 +24,6 @@ func NewReviewController(e *echo.Echo, Usecase domain.ReviewUsecase) {
 	e.GET("/review/:id", ReviewController.GetReviewByID)
 	e.POST("/customer/review/", ReviewController.Create)
 	e.GET("/customer/review/", ReviewController.GetAll)
-	e.GET("/customer/review/:id", ReviewController.GetReviewByID)
 	e.DELETE("/admin/review/:id", ReviewController.Delete)
 	e.GET("/admin/review", ReviewController.GetAll)
 	e.GET("/admin/review/:id", ReviewController.GetReviewByID)
