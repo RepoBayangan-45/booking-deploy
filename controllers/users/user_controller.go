@@ -39,7 +39,7 @@ func NewUserController(e *echo.Echo, Usecase domain.UserUsecase) {
 	e.GET("/admin/user/:id", UserController.GetUserByID)
 	e.DELETE("/admin/User/:id", UserController.DeleteUsers)
 	e.DELETE("/admin/user/:id", UserController.DeleteUsers)
-	e.PUT("/admin/user/:id/", UserController.UpdateUsers)
+	e.PUT("/admin/user/:id", UserController.UpdateUsers)
 }
 
 func (u *UserController) Login(c echo.Context) error {
