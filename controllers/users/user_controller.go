@@ -24,7 +24,9 @@ func NewUserController(e *echo.Echo, Usecase domain.UserUsecase) {
 
 	// Auth
 	e.POST("/login", UserController.Login)
+	e.POST("/Login", UserController.Login)
 	e.POST("/register", UserController.RegisterUser)
+	e.POST("/Register", UserController.RegisterUser)
 
 	// customer
 	e.POST("/customer", UserController.CreateUser)
