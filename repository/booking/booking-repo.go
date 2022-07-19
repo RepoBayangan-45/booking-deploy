@@ -32,13 +32,14 @@ func (u *bookingRepository) GetAll() ([]domain.Booking, error) {
 }
 
 // GetByID implements domain.BookingRepository
-func (u *bookingRepository) GetByID(id int) (*domain.Booking, error) {
-	booking := &domain.Booking{ID: id}
-	if err := u.Conn.First(&booking).Error; err != nil {
-		return nil, err
+func (u *bookingRepository) GetByID(id int) ([]domain.Booking, error) {
+	var bookings []domain.Booking
+	err := u.Conn.Preload("User").Preload("Jenis").Preload("Gedung").Find(&bookings)
+	if err.Error != nil {
+		return []domain.Booking{}, err.Error
 	}
-
-	return booking, nil
+	fmt.Println(bookings)
+	return bookings, nil
 }
 
 // Update implements domain.BookingRepository
