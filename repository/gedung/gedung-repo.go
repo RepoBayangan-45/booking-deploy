@@ -51,7 +51,7 @@ func (u *gedungRepository) GetAll() ([]domain.Gedung, error) {
 // GetByID implements domain.GedungRepository
 func (u *gedungRepository) GetByID(id int) (*domain.Gedung, error) {
 	gedung := &domain.Gedung{ID: id}
-	if err := u.Conn.First(&gedung).Error; err != nil {
+	if err := u.Conn.Preload("Review").Preload("Jenis").Preload("Nearby").First(&gedung).Error; err != nil {
 		return nil, err
 	}
 
