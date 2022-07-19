@@ -78,14 +78,48 @@ func (u *BookingController) GetByID(c echo.Context) error {
 		})
 	}
 
-	res := response.BookingResponse{
-		ID:          int(foundBooking.ID),
+	var res []response.BookingResponse
+	users := make([]response.User, 0)
+	for _, user := range foundBooking.User {
+		users = append(users, response.User{
+			ID:       user.ID,
+			Email:    user.Email,
+			FullName: user.FullName,
+			Alamat:   user.Alamat,
+			Phone:    user.Phone,
+		})
+	}
+	Jenis := make([]response.Jenis, 0)
+	for _, jenis := range foundBooking.Jenis {
+		Jenis = append(Jenis, response.Jenis{
+			ID:    jenis.ID,
+			Jenis: jenis.Jenis,
+		})
+	}
+	gedungs := make([]response.Gedung, 0)
+	for _, gedung := range foundBooking.Gedung {
+		gedungs = append(gedungs, response.Gedung{
+			ID:          gedung.ID,
+			Name:        gedung.Name,
+			Price:       gedung.Price,
+			Location:    gedung.Location,
+			Latitude:    gedung.Latitude,
+			Longitude:   gedung.Longitude,
+			Description: gedung.Description,
+		})
+	}
+
+	res = append(res, response.BookingResponse{
+		ID:          foundBooking.ID,
 		Status:      foundBooking.Status,
 		BookingCode: foundBooking.BookingCode,
 		OrderDate:   foundBooking.OrderDate,
 		CheckIn:     foundBooking.CheckIn,
 		CheckOut:    foundBooking.CheckOut,
-	}
+		User:        users,
+		Jenis:       Jenis,
+		Gedung:      gedungs,
+	})
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"code":   200,
