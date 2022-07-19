@@ -22,6 +22,7 @@ func NewBookingController(e *echo.Echo, Usecase domain.BookingUsecase) {
 
 	// customer
 	e.GET("/booking", BookingController.GetAll)
+	e.GET("/customer/bookings", BookingController.GetAll)
 	e.GET("/customer/booking/:id", BookingController.GetByID)
 
 	// admin
