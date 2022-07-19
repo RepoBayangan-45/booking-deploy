@@ -7,4 +7,5 @@ type PostRequest struct {
 	Latitude    string `json:"latitude"`
 	Longitude   string `json:"longitude"`
 	Description string `json:"description"`
+	IDBooking   int    `json:"id_booking"`
 }

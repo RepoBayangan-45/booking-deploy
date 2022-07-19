@@ -30,6 +30,9 @@ func (u *gedungUsecase) Create(request request.PostRequest) (*domain.Gedung, err
 	if request.Description == "" {
 		return nil, errors.New("description belum diisi")
 	}
+	if request.IDBooking == 0 {
+		return nil, errors.New("id_booking empty")
+	}
 	gedung := &domain.Gedung{
 		Name:        request.Name,
 		Location:    request.Location,
@@ -37,6 +40,7 @@ func (u *gedungUsecase) Create(request request.PostRequest) (*domain.Gedung, err
 		Latitude:    request.Latitude,
 		Longitude:   request.Longitude,
 		Description: request.Description,
+		IDBooking:   request.IDBooking,
 	}
 
 	postGedung, err := u.GedungRepo.Create(gedung)

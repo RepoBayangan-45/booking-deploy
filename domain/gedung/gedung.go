@@ -18,6 +18,7 @@ type Gedung struct {
 	Latitude    string         `json:"latitude"`
 	Longitude   string         `json:"longitude"`
 	Description string         `json:"description"`
+	IDBooking   int            `json:"id_booking"`
 	Review      []Review       `gorm:"Foreignkey:IDGedung;" json:"review"`
 	Nearby      []Nearby       `gorm:"Foreignkey:IDGedung;" json:"nearby"`
 	Jenis       []Jenis        `gorm:"Foreignkey:IDGedung;" json:"jenis"`

@@ -62,6 +62,7 @@ func (u *GedungController) Create(c echo.Context) error {
 		"Review":      res.Review,
 		"Jenis":       res.Jenis,
 		"Nearby":      res.Nearby,
+		"IDBooking":   res.IDBooking,
 	})
 
 }

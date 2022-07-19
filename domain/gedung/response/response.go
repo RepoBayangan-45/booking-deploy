@@ -11,6 +11,7 @@ type ResponsePost struct {
 	Reviews     []Review `json:"reviews"`
 	Nearby      []Nearby `json:"nearby"`
 	Jenis       []Jenis  `json:"jenisgedung"`
+	IDBooking   int      `json:"id_booking"`
 }
 type Review struct {
 	ID          int     `json:"id"`
