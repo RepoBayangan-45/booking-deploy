@@ -80,6 +80,16 @@ func (u *userRepository) Updates(id int) (*domain.User, error) {
 	return user, nil
 }
 
+// UpdatesAdmin implements domain.UserRepository
+func (u *userRepository) UpdatesAdmin(id int) (*domain.User, error) {
+	user := &domain.User{ID: id}
+	if err := u.Conn.Updates(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
 // CreateBooking implements domain.UserRepository
 func (u *userRepository) CreateBooking(user *domain.User) (*domain.User, error) {
 	if err := u.Conn.Create(&user).Error; err != nil {

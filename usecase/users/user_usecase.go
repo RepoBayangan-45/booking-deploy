@@ -146,6 +146,16 @@ func (u *userUsecase) Updates(id int) (*domain.User, error) {
 	return user, err
 }
 
+// UpdatesAdmin implements domain.UserUsecase
+func (u *userUsecase) UpdatesAdmin(id int) (*domain.User, error) {
+	user, err := u.UserRepo.Updates(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, err
+}
+
 // CreateBooking implements domain.UserUsecase
 func (u *userUsecase) CreateBooking(request request.UserBookingReq) (*domain.User, error) {
 	if request.Name == "" {

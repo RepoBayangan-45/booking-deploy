@@ -40,6 +40,7 @@ func NewUserController(e *echo.Echo, Usecase domain.UserUsecase) {
 	e.DELETE("/admin/User/:id", UserController.DeleteUsers)
 	e.DELETE("/admin/user/:id", UserController.DeleteUsers)
 	e.PUT("/admin/user/:id", UserController.UpdateUsers)
+	e.PUT("/admin/profile/:id", UserController.UpdatesAdmin)
 }
 
 func (u *UserController) Login(c echo.Context) error {
@@ -274,6 +275,36 @@ func (u *UserController) UpdateUsers(c echo.Context) error {
 		Password: updateUser.Password,
 		Alamat:   updateUser.Alamat,
 		Phone:    updateUser.Phone,
+	}).Error; err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"messages": err.Error(),
+			"code":     400,
+		})
+	}
+	foundUser, _ := u.UserUsecase.ReadByID(id)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": "success update user with id " + strconv.Itoa(id),
+		"code":     200,
+		"data":     foundUser,
+	})
+}
+
+func (u *UserController) UpdatesAdmin(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	updateUser := domain.User{}
+	err = c.Bind(&updateUser)
+	if err != nil {
+		return err
+	}
+
+	if err := config.DB.Model(&domain.User{}).Where("id = ?", id).Updates(domain.User{
+		Password:        updateUser.Password,
+		NewPassword:     updateUser.NewPassword,
+		ConfirmPassword: updateUser.ConfirmPassword,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"messages": err.Error(),

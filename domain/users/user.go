@@ -9,17 +9,19 @@ import (
 )
 
 type User struct {
-	ID        int            `json:"id"`
-	CreatedAt time.Time      `json:"createdAt"`
-	UpdatedAt time.Time      `json:"updatedAt"`
-	DeletedAt gorm.DeletedAt `json:"deletedAt"`
-	Email     string         `json:"email"`
-	Name      string         `json:"name"`
-	Fullname  string         `json:"fullname"`
-	Alamat    string         `json:"alamat"`
-	Phone     string         `json:"phone"`
-	Password  string         `json:"password"`
-	IDBooking int            `json:"id_booking"`
+	ID              int            `json:"id"`
+	CreatedAt       time.Time      `json:"createdAt"`
+	UpdatedAt       time.Time      `json:"updatedAt"`
+	DeletedAt       gorm.DeletedAt `json:"deletedAt"`
+	Email           string         `json:"email"`
+	Name            string         `json:"name"`
+	Fullname        string         `json:"fullname"`
+	Alamat          string         `json:"alamat"`
+	Phone           string         `json:"phone"`
+	Password        string         `json:"password"`
+	NewPassword     string         `json:"newpassword"`
+	ConfirmPassword string         `json:"Confirmpassword"`
+	IDBooking       int            `json:"id_booking"`
 }
 
 type Users []User
@@ -34,6 +36,7 @@ type UserRepository interface {
 	RegisterUser(user *User) (*User, error)
 	Delete(id int) (*User, error)
 	Updates(id int) (*User, error)
+	UpdatesAdmin(id int) (*User, error)
 }
 
 type UserUsecase interface {
