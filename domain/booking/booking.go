@@ -25,7 +25,7 @@ type User struct {
 	ID        int
 	Email     string
 	Name      string
-	FullName  string
+	Fullname  string
 	Alamat    string
 	Phone     string
 	IDBooking string

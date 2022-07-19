@@ -84,7 +84,7 @@ func (u *BookingController) GetByID(c echo.Context) error {
 		users = append(users, response.User{
 			ID:       user.ID,
 			Email:    user.Email,
-			FullName: user.FullName,
+			Fullname: user.Fullname,
 			Alamat:   user.Alamat,
 			Phone:    user.Phone,
 		})
@@ -138,7 +138,7 @@ func (u *BookingController) GetAll(c echo.Context) error {
 			users = append(users, response.User{
 				ID:       user.ID,
 				Email:    user.Email,
-				FullName: user.FullName,
+				Fullname: user.Fullname,
 				Alamat:   user.Alamat,
 				Phone:    user.Phone,
 			})
