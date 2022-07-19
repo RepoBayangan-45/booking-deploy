@@ -34,7 +34,7 @@ func (u *bookingRepository) GetAll() ([]domain.Booking, error) {
 // GetByID implements domain.BookingRepository
 func (u *bookingRepository) GetByID(id int) (*domain.Booking, error) {
 	booking := &domain.Booking{ID: id}
-	if err := u.Conn.First(&booking).Error; err != nil {
+	if err := u.Conn.Preload("User").Preload("Jenis").Preload("Gedung").First(&booking).Error; err != nil {
 		return nil, err
 	}
 
