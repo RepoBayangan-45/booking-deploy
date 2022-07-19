@@ -8,18 +8,19 @@ import (
 )
 
 type Booking struct {
-	ID          int            `json:"id" gorm:"PrimaryKey"`
-	CreatedAt   time.Time      `json:"createdAt"`
-	UpdatedAt   time.Time      `json:"updatedAt"`
-	DeletedAt   gorm.DeletedAt `json:"deletedAt"`
-	Status      string         `json:"status"`
-	BookingCode string         `json:"bookingcode"`
-	OrderDate   string         `json:"orderdate"`
-	CheckIn     string         `json:"checkin"`
-	CheckOut    string         `json:"checkout"`
-	User        []User         `gorm:"Foreignkey:IDBooking;" json:"user"`
-	Gedung      []Gedung       `gorm:"Foreignkey:IDBooking;" json:"gedung"`
-	Jenis       []Jenis        `gorm:"Foreignkey:IDBooking;" json:"jenis"`
+	ID           int            `json:"id" gorm:"PrimaryKey"`
+	CreatedAt    time.Time      `json:"createdAt"`
+	UpdatedAt    time.Time      `json:"updatedAt"`
+	DeletedAt    gorm.DeletedAt `json:"deletedAt"`
+	Status       string         `json:"status"`
+	BookingCode  string         `json:"bookingcode"`
+	TotalBooking string         `json:"totalbooking"`
+	OrderDate    string         `json:"orderdate"`
+	CheckIn      string         `json:"checkin"`
+	CheckOut     string         `json:"checkout"`
+	User         []User         `gorm:"Foreignkey:IDBooking;" json:"user"`
+	Gedung       []Gedung       `gorm:"Foreignkey:IDBooking;" json:"gedung"`
+	Jenis        []Jenis        `gorm:"Foreignkey:IDBooking;" json:"jenis"`
 }
 type User struct {
 	ID        int

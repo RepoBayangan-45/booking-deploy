@@ -49,16 +49,17 @@ func (u *BookingController) Create(c echo.Context) error {
 		})
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"code":        200,
-		"ID":          res.ID,
-		"status":      res.Status,
-		"bookingcode": res.BookingCode,
-		"OrderDate":   res.OrderDate,
-		"check in":    res.CheckIn,
-		"check out":   res.CheckOut,
-		"user":        res.User,
-		"gedung":      res.Gedung,
-		"jenis":       res.Jenis,
+		"code":         200,
+		"ID":           res.ID,
+		"status":       res.Status,
+		"bookingcode":  res.BookingCode,
+		"totalbooking": res.TotalBooking,
+		"OrderDate":    res.OrderDate,
+		"check in":     res.CheckIn,
+		"check out":    res.CheckOut,
+		"user":         res.User,
+		"gedung":       res.Gedung,
+		"jenis":        res.Jenis,
 	})
 
 }
@@ -107,15 +108,16 @@ func (u *BookingController) GetByID(c echo.Context) error {
 	}
 
 	res = append(res, response.BookingResponse{
-		ID:          foundBooking.ID,
-		Status:      foundBooking.Status,
-		BookingCode: foundBooking.BookingCode,
-		OrderDate:   foundBooking.OrderDate,
-		CheckIn:     foundBooking.CheckIn,
-		CheckOut:    foundBooking.CheckOut,
-		User:        users,
-		Jenis:       Jenis,
-		Gedung:      gedungs,
+		ID:           foundBooking.ID,
+		Status:       foundBooking.Status,
+		BookingCode:  foundBooking.BookingCode,
+		TotalBooking: foundBooking.TotalBooking,
+		OrderDate:    foundBooking.OrderDate,
+		CheckIn:      foundBooking.CheckIn,
+		CheckOut:     foundBooking.CheckOut,
+		User:         users,
+		Jenis:        Jenis,
+		Gedung:       gedungs,
 	})
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -163,15 +165,16 @@ func (u *BookingController) GetAll(c echo.Context) error {
 			})
 		}
 		res = append(res, response.BookingResponse{
-			ID:          foundBooking.ID,
-			Status:      foundBooking.Status,
-			BookingCode: foundBooking.BookingCode,
-			OrderDate:   foundBooking.OrderDate,
-			CheckIn:     foundBooking.CheckIn,
-			CheckOut:    foundBooking.CheckOut,
-			User:        users,
-			Jenis:       Jenis,
-			Gedung:      gedungs,
+			ID:           foundBooking.ID,
+			Status:       foundBooking.Status,
+			BookingCode:  foundBooking.BookingCode,
+			TotalBooking: foundBooking.TotalBooking,
+			OrderDate:    foundBooking.OrderDate,
+			CheckIn:      foundBooking.CheckIn,
+			CheckOut:     foundBooking.CheckOut,
+			User:         users,
+			Jenis:        Jenis,
+			Gedung:       gedungs,
 		})
 	}
 
@@ -217,11 +220,12 @@ func (u *BookingController) Update(c echo.Context) error {
 	}
 
 	if err := config.DB.Model(&domain.Booking{}).Where("id = ?", id).Updates(domain.Booking{
-		Status:      updateBooking.Status,
-		BookingCode: updateBooking.BookingCode,
-		OrderDate:   updateBooking.OrderDate,
-		CheckIn:     updateBooking.CheckIn,
-		CheckOut:    updateBooking.CheckOut,
+		Status:       updateBooking.Status,
+		BookingCode:  updateBooking.BookingCode,
+		TotalBooking: updateBooking.TotalBooking,
+		OrderDate:    updateBooking.OrderDate,
+		CheckIn:      updateBooking.CheckIn,
+		CheckOut:     updateBooking.CheckOut,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"messages": err.Error(),
