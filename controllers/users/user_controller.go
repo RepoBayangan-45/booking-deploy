@@ -269,12 +269,13 @@ func (u *UserController) UpdateUsers(c echo.Context) error {
 	}
 
 	if err := config.DB.Model(&domain.User{}).Where("id = ?", id).Updates(domain.User{
-		Name:     updateUser.Name,
-		Fullname: updateUser.Fullname,
-		Email:    updateUser.Email,
-		Password: updateUser.Password,
-		Alamat:   updateUser.Alamat,
-		Phone:    updateUser.Phone,
+		Name:      updateUser.Name,
+		Fullname:  updateUser.Fullname,
+		Email:     updateUser.Email,
+		Password:  updateUser.Password,
+		Alamat:    updateUser.Alamat,
+		Phone:     updateUser.Phone,
+		IDBooking: updateUser.IDBooking,
 	}).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"messages": err.Error(),
