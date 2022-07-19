@@ -8,6 +8,8 @@ type BookingResponse struct {
 	OrderDate    string   `json:"orderdate"`
 	CheckIn      string   `json:"checkin"`
 	CheckOut     string   `json:"checkout"`
+	Name         string   `json:"fullname"`
+	Phone        string   `json:"phone"`
 	User         []User   `gorm:"Foreignkey:IDBooking;" json:"user"`
 	Gedung       []Gedung `gorm:"Foreignkey:IDBooking;" json:"gedung"`
 	Jenis        []Jenis  `gorm:"Foreignkey:IDBooking;" json:"jenis"`

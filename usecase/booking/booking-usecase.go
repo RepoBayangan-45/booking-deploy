@@ -30,6 +30,12 @@ func (u *bookingUsecase) Create(request request.BookingRequest) (*domain.Booking
 	if request.CheckOut == "" {
 		return nil, errors.New("checkout empty")
 	}
+	if request.Name == "" {
+		return nil, errors.New("name empty")
+	}
+	if request.Phone == "" {
+		return nil, errors.New("phone empty")
+	}
 	booking := &domain.Booking{
 		Status:       request.Status,
 		BookingCode:  request.BookingCode,
@@ -37,6 +43,8 @@ func (u *bookingUsecase) Create(request request.BookingRequest) (*domain.Booking
 		OrderDate:    request.OrderDate,
 		CheckIn:      request.CheckIn,
 		CheckOut:     request.CheckOut,
+		Name:         request.Name,
+		Phone:        request.Phone,
 	}
 
 	postBooking, err := u.BookingRepo.Create(booking)
