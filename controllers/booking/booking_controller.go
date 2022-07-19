@@ -99,13 +99,10 @@ func (u *BookingController) GetByID(c echo.Context) error {
 	gedungs := make([]response.Gedung, 0)
 	for _, gedung := range foundBooking.Gedung {
 		gedungs = append(gedungs, response.Gedung{
-			ID:          gedung.ID,
-			Name:        gedung.Name,
-			Price:       gedung.Price,
-			Location:    gedung.Location,
-			Latitude:    gedung.Latitude,
-			Longitude:   gedung.Longitude,
-			Description: gedung.Description,
+			ID:       gedung.ID,
+			Name:     gedung.Name,
+			Price:    gedung.Price,
+			Location: gedung.Location,
 		})
 	}
 
