@@ -219,12 +219,13 @@ func (u *UserController) GetUsers(c echo.Context) error {
 	var res []response.UsersResponse
 	for _, foundUser := range *foundUsers {
 		res = append(res, response.UsersResponse{
-			ID:       int(foundUser.ID),
-			Email:    foundUser.Email,
-			Name:     foundUser.Name,
-			Fullname: foundUser.Fullname,
-			Alamat:   foundUser.Alamat,
-			Phone:    foundUser.Phone,
+			ID:        int(foundUser.ID),
+			Email:     foundUser.Email,
+			Name:      foundUser.Name,
+			Fullname:  foundUser.Fullname,
+			Alamat:    foundUser.Alamat,
+			Phone:     foundUser.Phone,
+			CreatedAt: foundUser.CreatedAt,
 		})
 	}
 
