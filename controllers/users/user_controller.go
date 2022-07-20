@@ -164,13 +164,14 @@ func (u *UserController) GetUserByID(c echo.Context) error {
 	}
 
 	res := response.UserResponse{
-		ID:       int(foundUser.ID),
-		Email:    foundUser.Email,
-		Password: foundUser.Password,
-		Name:     foundUser.Name,
-		Fullname: foundUser.Fullname,
-		Alamat:   foundUser.Alamat,
-		Phone:    foundUser.Phone,
+		ID:        int(foundUser.ID),
+		Email:     foundUser.Email,
+		Password:  foundUser.Password,
+		Name:      foundUser.Name,
+		Fullname:  foundUser.Fullname,
+		Alamat:    foundUser.Alamat,
+		Phone:     foundUser.Phone,
+		CreatedAt: foundUser.CreatedAt,
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
